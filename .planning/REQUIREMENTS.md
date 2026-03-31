@@ -12,8 +12,8 @@
 
 ### Agent Definitions
 
-- [ ] **AGENT-01**: GSD agent types (planner, researcher, executor, checker, etc.) defined as `.claude/agents/*.md` files with typed capabilities
-- [ ] **AGENT-02**: Agent definitions specify per-agent tools, model overrides, and permissions replacing prompt-embedded role descriptions
+- [x] **AGENT-01**: GSD agent types (planner, researcher, executor, checker, etc.) defined as `.claude/agents/*.md` files with typed capabilities
+- [x] **AGENT-02**: Agent definitions specify per-agent tools, model overrides, and permissions replacing prompt-embedded role descriptions
 
 ### MCP Server
 
@@ -59,8 +59,8 @@
 |-------------|-------|--------|
 | SKILL-01 | Phase 1 | Pending |
 | SKILL-02 | Phase 1 | Pending |
-| AGENT-01 | Phase 1 | Pending |
-| AGENT-02 | Phase 1 | Pending |
+| AGENT-01 | Phase 1 | Complete |
+| AGENT-02 | Phase 1 | Complete |
 | MCP-01 | Phase 2 | Pending |
 | MCP-02 | Phase 2 | Pending |
 | MCP-03 | Phase 2 | Pending |
