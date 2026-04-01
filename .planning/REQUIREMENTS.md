@@ -7,7 +7,7 @@
 
 ### Skill Optimization
 
-- [ ] **SKILL-01**: GSD skill files use `context: 'fork'` to isolate orchestration prompts in sub-agent context
+- [x] **SKILL-01**: GSD skill files use `context: 'fork'` to isolate orchestration prompts in sub-agent context
 - [ ] **SKILL-02**: CLAUDE.md injection reduced from ~3,000-5,000 tokens to ~100 token availability notice with on-demand loading
 
 ### Agent Definitions
@@ -57,7 +57,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SKILL-01 | Phase 1 | Pending |
+| SKILL-01 | Phase 1 | Complete |
 | SKILL-02 | Phase 1 | Pending |
 | AGENT-01 | Phase 1 | Complete |
 | AGENT-02 | Phase 1 | Complete |
