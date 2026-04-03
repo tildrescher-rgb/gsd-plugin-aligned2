@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "gsd": {
+      "command": "node",
+      "args": ["/Users/jnuyens/.claude/get-shit-done/mcp/server.cjs"]
+    }
+  }
+}
