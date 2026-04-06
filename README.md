@@ -56,8 +56,6 @@ claude plugin marketplace update gsd-plugin
 
 If you already have GSD installed (via `npx get-shit-done-cc` or `~/.claude/get-shit-done/`), you can test this plugin version safely in an isolated environment.
 
-### Option A: CLAUDE_PLUGIN_ROOT override (recommended)
-
 Test the plugin from a fresh project directory without touching your existing install:
 
 ```bash
@@ -84,30 +82,6 @@ mv ~/.claude/get-shit-done-legacy ~/.claude/get-shit-done
 ```
 
 The `CLAUDE_PLUGIN_ROOT` env var tells the plugin's `bin/lib/core.cjs` to resolve all paths from the specified directory instead of the default plugin cache.
-
-### Option B: Separate Claude Code profile
-
-If Claude Code supports profile directories (check `claude --help` for `--profile` or `CLAUDE_CONFIG_DIR`):
-
-```bash
-# Create an isolated profile
-mkdir -p ~/.claude-test
-CLAUDE_CONFIG_DIR=~/.claude-test claude
-
-# Install the plugin in the isolated profile
-# /gsd:help should work, your main profile is untouched
-```
-
-### Option C: Docker / devcontainer
-
-For full isolation:
-
-```bash
-# Use a devcontainer or Docker with Claude Code installed
-# Install the plugin fresh -- zero risk to host system
-claude plugin marketplace add jnuyens/gsd-plugin
-claude plugin install gsd@gsd-plugin
-```
 
 ### What to verify
 
