@@ -64,15 +64,23 @@ Test the plugin from a fresh project directory without touching your existing in
 # 1. Clone this repo somewhere
 git clone https://github.com/jnuyens/gsd-plugin.git ~/src/gsd-plugin
 
-# 2. Create a throwaway test project
+# 2. Move the legacy install out of the way (prevents duplicate commands)
+mv ~/.claude/get-shit-done ~/.claude/get-shit-done-legacy
+
+# 3. Create a throwaway test project
 mkdir ~/test-gsd-plugin && cd ~/test-gsd-plugin
 git init
 
-# 3. Launch Claude Code with the plugin root override
+# 4. Launch Claude Code with the plugin root override
 CLAUDE_PLUGIN_ROOT=~/src/gsd-plugin claude --dangerously-skip-permissions
 
-# 4. Inside the session, GSD commands use the plugin version
-#    Your ~/.claude/get-shit-done/ is untouched
+# 5. Inside the session, only plugin GSD commands are active
+```
+
+To restore your legacy install after testing:
+
+```bash
+mv ~/.claude/get-shit-done-legacy ~/.claude/get-shit-done
 ```
 
 The `CLAUDE_PLUGIN_ROOT` env var tells the plugin's `bin/lib/core.cjs` to resolve all paths from the specified directory instead of the default plugin cache.
