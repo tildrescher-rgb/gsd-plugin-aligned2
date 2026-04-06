@@ -4,7 +4,7 @@
       "name": "gsd",
       "source": {
         "type": "github",
-        "repo": "jnuyens/claude-code-gsd"
+        "repo": "jnuyens/gsd-plugin"
       },
       "description": "Get Shit Done -- structured workflow plugin for Claude Code with planning, execution, verification, and MCP-backed project state",
       "category": "productivity",

@@ -1,7 +1,7 @@
 {
-  "name": "get-shit-done-cc",
+  "name": "gsd-plugin",
   "version": "1.32.0",
-  "description": "Get Shit Done -- structured workflow plugin for Claude Code",
+  "description": "Performance-optimized plugin packaging of GSD (Get Shit Done) for Claude Code",
   "private": true,
   "scripts": {
     "validate:gsd-plugin": "node bin/validate-plugin.cjs .claude-plugin/plugin.json"
@@ -10,12 +10,19 @@
     "claude-code",
     "plugin",
     "workflow",
-    "gsd"
+    "gsd",
+    "mcp"
   ],
   "author": "Jasper Nuyens",
+  "contributors": [
+    {
+      "name": "TACHES (Lex Christopherson)",
+      "url": "https://github.com/gsd-build/get-shit-done"
+    }
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jnuyens/claude-code-gsd.git"
+    "url": "https://github.com/jnuyens/gsd-plugin.git"
   }
 }

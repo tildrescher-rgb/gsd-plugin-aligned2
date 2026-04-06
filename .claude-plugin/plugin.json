@@ -5,7 +5,7 @@
   "author": {
     "name": "Jasper Nuyens"
   },
-  "repository": "https://github.com/jnuyens/claude-code-gsd",
+  "repository": "https://github.com/jnuyens/gsd-plugin",
   "license": "MIT",
   "keywords": [
     "workflow",

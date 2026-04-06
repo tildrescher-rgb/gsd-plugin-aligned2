@@ -18,18 +18,18 @@
 ### MCP Server
 
 - [x] **MCP-01**: GSD MCP server exposes project state (phase, requirements, roadmap, config) as MCP resources
-- [ ] **MCP-02**: GSD operations available as structured MCP tools replacing prompt-injected orchestration context
+- [x] **MCP-02**: GSD operations available as structured MCP tools replacing prompt-injected orchestration context
 - [x] **MCP-03**: MCP server auto-starts when GSD project detected (`.planning/` directory exists)
 
 ### Memory Integration
 
-- [ ] **MEM-01**: GSD phase outcomes and key decisions written to Claude Code's `memdir/` auto-memory system
-- [ ] **MEM-02**: Project context auto-recalled across sessions without manual CLAUDE.md loading
+- [x] **MEM-01**: GSD phase outcomes and key decisions written to Claude Code's `memdir/` auto-memory system
+- [x] **MEM-02**: Project context auto-recalled across sessions without manual CLAUDE.md loading
 
 ### Plugin Packaging
 
-- [ ] **PLUG-01**: GSD packaged as a Claude Code plugin bundling skills, agents, MCP server, and hooks
-- [ ] **PLUG-02**: Single-step installation via plugin manifest (replaces manual `~/.claude/get-shit-done/` setup)
+- [x] **PLUG-01**: GSD packaged as a Claude Code plugin bundling skills, agents, MCP server, and hooks
+- [x] **PLUG-02**: Single-step installation via plugin manifest (replaces manual `~/.claude/get-shit-done/` setup)
 
 ## v2 Requirements
 
@@ -62,12 +62,12 @@
 | AGENT-01 | Phase 1 | Complete |
 | AGENT-02 | Phase 1 | Complete |
 | MCP-01 | Phase 2 | Complete |
-| MCP-02 | Phase 2 | Pending |
+| MCP-02 | Phase 2 | Complete |
 | MCP-03 | Phase 2 | Complete |
-| MEM-01 | Phase 3 | Pending |
-| MEM-02 | Phase 3 | Pending |
-| PLUG-01 | Phase 3 | Pending |
-| PLUG-02 | Phase 3 | Pending |
+| MEM-01 | Phase 3 | Complete |
+| MEM-02 | Phase 3 | Complete |
+| PLUG-01 | Phase 3 | Complete |
+| PLUG-02 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 11 total
