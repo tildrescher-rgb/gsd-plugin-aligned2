@@ -146,6 +146,9 @@ If you previously installed GSD via `get-shit-done-cc` or manual setup, most mig
 On your first session after installing the plugin, GSD auto-migrates:
 
 - **Moves** `~/.claude/get-shit-done/` to `~/.claude/get-shit-done-legacy/` (safe backup, not deleted)
+- **Moves** `~/.claude/commands/gsd/` to `~/.claude/commands/gsd-legacy/` (prevents duplicate slash commands)
+- **Removes** legacy GSD skill directories (`gsd-*`) from `~/.claude/skills/`
+- **Removes** legacy GSD agent files (`gsd-*.md`) from `~/.claude/agents/`
 - **Removes** legacy GSD MCP server entries from your project's `.mcp.json`
 - **Removes** legacy GSD hook entries from `~/.claude/settings.json`
 - **Removes** legacy hook scripts (`gsd-check-update.js`, `gsd-context-monitor.js`, `gsd-prompt-guard.js`, `gsd-statusline.js`) from `~/.claude/hooks/`
