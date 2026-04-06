@@ -264,6 +264,34 @@ function safeReadFile(filePath) {
   }
 }
 
+/**
+ * Canonical config defaults. Single source of truth — imported by config.cjs and verify.cjs.
+ */
+const CONFIG_DEFAULTS = {
+  model_profile: 'balanced',
+  commit_docs: true,
+  search_gitignored: false,
+  branching_strategy: 'none',
+  phase_branch_template: 'gsd/phase-{phase}-{slug}',
+  milestone_branch_template: 'gsd/{milestone}-{slug}',
+  quick_branch_template: null,
+  research: true,
+  plan_checker: true,
+  verifier: true,
+  nyquist_validation: true,
+  parallelization: true,
+  brave_search: false,
+  firecrawl: false,
+  exa_search: false,
+  text_mode: false,
+  sub_repos: [],
+  resolve_model_ids: false,
+  context_window: 200000,
+  phase_naming: 'sequential',
+  project_code: null,
+  subagent_timeout: 300000,
+};
+
 function loadConfig(cwd) {
   const configPath = path.join(planningDir(cwd), 'config.json');
   const defaults = {
@@ -1308,9 +1336,9 @@ function checkAgentsInstalled() {
  * Users can override with model_overrides in config.json for custom/latest models.
  */
 const MODEL_ALIAS_MAP = {
-  'opus': 'claude-opus-4-0',
-  'sonnet': 'claude-sonnet-4-5',
-  'haiku': 'claude-haiku-3-5',
+  'opus': 'claude-opus-4-6',
+  'sonnet': 'claude-sonnet-4-6',
+  'haiku': 'claude-haiku-4-5',
 };
 
 function resolveModelInternal(cwd, agentType) {
@@ -1534,6 +1562,7 @@ module.exports = {
   detectSubRepos,
   reapStaleTempFiles,
   MODEL_ALIAS_MAP,
+  CONFIG_DEFAULTS,
   planningDir,
   planningRoot,
   planningPaths,
