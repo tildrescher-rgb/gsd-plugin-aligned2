@@ -24,6 +24,11 @@ metrics:
   completed: 2026-04-10
   tasks_completed: 1
   files_changed: 1
+posted:
+  url: "https://github.com/gsd-build/get-shit-done/discussions/2017"
+  category: "Show and tell"
+  date: 2026-04-09
+  posted_as_title: "Sharing gsd-plugin: a Claude Code plugin packaging of GSD - would upstream integration be useful?"
 ---
 
 # Quick Task 260410-0np: Draft GSD Discussions Post Summary
@@ -141,3 +146,24 @@ Out-of-scope observation (NOT fixed, logged here for visibility only): The repo-
 - Line count 41 >= min_lines 40: PASS
 - No emojis: PASS
 - No marketing superlatives: PASS
+
+## Posted Outcome (2026-04-09)
+
+Posted to https://github.com/gsd-build/get-shit-done/discussions/2017 in the **Show and tell** category. User edited the draft before posting. Notable changes:
+
+| Change | Draft → Posted | Why it matters |
+|---|---|---|
+| Project name | "claude-code-gsd" → "gsd-plugin" | Matches actual repo/package name. Draft's marketing-style name was inconsistent with everything else in the repo. |
+| **Base version** | "GSD 1.32.0" → "GSD 1.33.0" | **Draft was factually wrong.** `package.json`, `plugin.json`, and `README.md` all say 1.33.0; only `PROJECT.md:50` said 1.32.0 — stale. Fixed in this commit. |
+| Install command | `claude plugin install gsd` → `claude plugin marketplace add jnuyens/gsd-plugin && claude plugin install gsd@gsd-plugin` | Draft abstracted away the marketplace registration step. User wants the real command users will run, not a simplified one. |
+| Opening sentence | Dropped trailing "— so this is a discussion, not a pitch." | Self-deprecating framing was unnecessary; the "What it is NOT" section already makes this point. |
+| "Why I built it" | Dropped the fork-analysis bullet (8-16 hrs/month) and the six-integration-seams bullet | User wanted leaner motivation — not a defence of the technical approach. |
+| "Not a fork" bullet | Dropped "— no source modification, no upstream coupling" qualifier | Redundant elaboration the reader didn't need. |
+| Dashes | Em-dashes in title → hyphens | Stylistic consistency with GitHub title conventions. |
+
+**Pattern:** user consistently trimmed justification, abstraction, and self-positioning. Kept motivation, concrete facts, concrete commands, and the open question.
+
+## Follow-up Corrections
+
+1. **Fixed `PROJECT.md:50`** — `GSD 1.32.0` → `GSD 1.33.0` (matches package.json, plugin.json, README.md). This was the source of the stale version in the draft.
+2. **Still outstanding**: the `.gitignore` `.planning/` rule conflict flagged under "Deferred Issues" above — not blocking, but worth a separate quick task eventually.

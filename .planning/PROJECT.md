@@ -47,7 +47,7 @@ Shipped v1.0 with 3 phases, 10 plans, 27 tasks over 7 days.
 Tech stack: Node.js CJS (bin/lib), MCP server (stdio JSON-RPC), Claude Code plugin system.
 ~14k LOC in bin/*.cjs, ~573 LOC MCP server, 60 self-contained skill files (~21k LOC).
 Published as [jnuyens/gsd-plugin](https://github.com/jnuyens/gsd-plugin) on GitHub.
-Based on [GSD 1.32.0](https://github.com/gsd-build/get-shit-done) by TACHES (Lex Christopherson).
+Based on [GSD 1.33.0](https://github.com/gsd-build/get-shit-done) by TACHES (Lex Christopherson).
 
 ## Constraints
 
