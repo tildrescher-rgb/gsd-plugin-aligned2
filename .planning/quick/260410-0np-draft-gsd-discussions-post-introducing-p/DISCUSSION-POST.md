@@ -35,7 +35,7 @@ Happy to share implementation details, the six integration seams, measurement no
 
 ## Links
 
-- [claude-code-gsd on GitHub](https://github.com/jnuyens/gsd-plugin) <!-- confirm this URL before posting -->
+- [claude-code-gsd on GitHub](https://github.com/jnuyens/gsd-plugin)
 - Based on [GSD 1.32.0](https://github.com/gsd-build/get-shit-done) by Lex Christopherson (TACHES).
 
 Thanks for reading — curious what people think.
