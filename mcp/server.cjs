@@ -26,7 +26,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 // Resolve GSD bin/lib from plugin root (server lives at <root>/mcp/server.cjs)
 const pluginRoot = process.env.CLAUDE_PLUGIN_ROOT || path.resolve(__dirname, '..');
@@ -417,11 +417,12 @@ function handleToolCall(name, args) {
       case 'gsd_commit_docs': {
         try {
           const files = args.files || [];
+          const message = args.message || 'docs: update';
           if (files.length > 0) {
-            execSync(`git add ${files.map(f => `"${f}"`).join(' ')}`, { stdio: 'pipe' });
+            execFileSync('git', ['add', '--', ...files], { stdio: 'pipe' });
           }
-          execSync(`git commit -m "${(args.message || 'docs: update').replace(/"/g, '\\"')}"`, { stdio: 'pipe' });
-          return { content: [{ type: 'text', text: `Committed: ${args.message}` }] };
+          execFileSync('git', ['commit', '-m', message], { stdio: 'pipe' });
+          return { content: [{ type: 'text', text: `Committed: ${message}` }] };
         } catch (err) {
           return { content: [{ type: 'text', text: `Commit failed: ${err.message}` }], isError: true };
         }
