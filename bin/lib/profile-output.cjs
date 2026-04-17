@@ -503,6 +503,7 @@ function cmdWriteProfile(cwd, options, raw) {
     /api[_-]?key\s*[:=]\s*\S+/gi,
     /\/Users\/[a-zA-Z0-9._-]+\//g,
     /\/home\/[a-zA-Z0-9._-]+\//g,
+    /[A-Za-z]:\\Users\\[a-zA-Z0-9._-]+\\/g,
     /ghp_[a-zA-Z0-9]{36}/g,
     /gho_[a-zA-Z0-9]{36}/g,
     /xoxb-[a-zA-Z0-9-]+/g,
