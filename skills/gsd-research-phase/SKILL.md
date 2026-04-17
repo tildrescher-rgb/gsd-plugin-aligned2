@@ -1,13 +1,12 @@
 ---
-name: gsd-research-phase
-description: "Research how to implement a phase (standalone - usually use /gsd-plan-phase instead)"
+name: gsd:research-phase
+description: Research how to implement a phase (standalone - usually use /gsd-plan-phase instead)
 argument-hint: "[phase]"
 allowed-tools:
   - Read
   - Bash
   - Task
 ---
-
 
 <objective>
 Research how to implement a phase. Spawns gsd-phase-researcher agent with phase context.
@@ -40,7 +39,7 @@ Normalize phase input in step 1 before any directory lookups.
 ## 0. Initialize Context
 
 ```bash
-INIT=$(node "$GSD_TOOLS" init phase-op "$ARGUMENTS")
+INIT=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" init phase-op "$ARGUMENTS")
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 
@@ -48,13 +47,13 @@ Extract from init JSON: `phase_dir`, `phase_number`, `phase_name`, `phase_found`
 
 Resolve researcher model:
 ```bash
-RESEARCHER_MODEL=$(node "$GSD_TOOLS" resolve-model gsd-phase-researcher --raw)
+RESEARCHER_MODEL=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" resolve-model gsd-phase-researcher --raw)
 ```
 
 ## 1. Validate Phase
 
 ```bash
-PHASE_INFO=$(node "$GSD_TOOLS" roadmap get-phase "${phase_number}")
+PHASE_INFO=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" roadmap get-phase "${phase_number}")
 ```
 
 **If `found` is false:** Error and exit. **If `found` is true:** Extract `phase_number`, `phase_name`, `goal` from JSON.

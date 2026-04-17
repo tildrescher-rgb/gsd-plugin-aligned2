@@ -70,6 +70,9 @@
  *   audit-uat                           Scan all phases for unresolved UAT/verification items
  *   uat render-checkpoint --file <path> Render the current UAT checkpoint block
  *
+ * Open Artifact Audit:
+ *   audit-open [--json]                 Scan all .planning/ artifact types for unresolved items
+ *
  * Intel:
  *   intel query <term>             Query intel files for a term
  *   intel status                   Show intel file freshness
@@ -158,12 +161,6 @@
  * GSD-2 Migration:
  *   from-gsd2 [--path <dir>] [--force] [--dry-run]
  *             Import a GSD-2 (.gsd/) project back to GSD v1 (.planning/) format
- *
- * Plugin-local Commands:
- *   write-phase-memory <phase>         Write phase memory (plugin)
- *   checkpoint <args>                  Save/restore session checkpoint (plugin)
- *   migrate [args]                     Run legacy migration helper (plugin)
- *   hook <type>                        Handle lifecycle hooks (session-start, pre-compact)
  */
 
 const fs = require('fs');
@@ -476,6 +473,9 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
       } else if (subcommand === 'sync') {
         const { verify } = parseNamedArgs(args, [], ['verify']);
         state.cmdStateSync(cwd, { verify }, raw);
+      } else if (subcommand === 'prune') {
+        const { 'keep-recent': keepRecent, 'dry-run': dryRun } = parseNamedArgs(args, ['keep-recent'], ['dry-run']);
+        state.cmdStatePrune(cwd, { keepRecent: keepRecent || '3', dryRun: !!dryRun }, raw);
       } else {
         state.cmdStateLoad(cwd, raw);
       }
@@ -644,6 +644,11 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
       break;
     }
 
+    case 'skill-manifest': {
+      init.cmdSkillManifest(cwd, args, raw);
+      break;
+    }
+
     case 'history-digest': {
       commands.cmdHistoryDigest(cwd, raw);
       break;
@@ -709,6 +714,16 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
           }
         }
         phase.cmdPhaseAdd(cwd, descArgs.join(' '), raw, customId);
+      } else if (subcommand === 'add-batch') {
+        // Accepts JSON array of descriptions via --descriptions '[...]' or positional args
+        const descFlagIdx = args.indexOf('--descriptions');
+        let descriptions;
+        if (descFlagIdx !== -1 && args[descFlagIdx + 1]) {
+          try { descriptions = JSON.parse(args[descFlagIdx + 1]); } catch (e) { error('--descriptions must be a JSON array'); }
+        } else {
+          descriptions = args.slice(2).filter(a => a !== '--raw');
+        }
+        phase.cmdPhaseAddBatch(cwd, descriptions, raw);
       } else if (subcommand === 'insert') {
         phase.cmdPhaseInsert(cwd, args[2], args.slice(3).join(' '), raw);
       } else if (subcommand === 'remove') {
@@ -717,7 +732,7 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
       } else if (subcommand === 'complete') {
         phase.cmdPhaseComplete(cwd, args[2], raw);
       } else {
-        error('Unknown phase subcommand. Available: next-decimal, add, insert, remove, complete');
+        error('Unknown phase subcommand. Available: next-decimal, add, add-batch, insert, remove, complete');
       }
       break;
     }
@@ -758,6 +773,18 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
     case 'audit-uat': {
       const uat = require('./lib/uat.cjs');
       uat.cmdAuditUat(cwd, raw);
+      break;
+    }
+
+    case 'audit-open': {
+      const { auditOpenArtifacts, formatAuditReport } = require('./lib/audit.cjs');
+      const includeRaw = args.includes('--json');
+      const result = auditOpenArtifacts(cwd);
+      if (includeRaw) {
+        output(JSON.stringify(result, null, 2), raw);
+      } else {
+        output(formatAuditReport(result), raw);
+      }
       break;
     }
 
@@ -805,13 +832,13 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
       const workflow = args[1];
       switch (workflow) {
         case 'execute-phase': {
-          const { validate: epValidate } = parseNamedArgs(args, [], ['validate']);
-          init.cmdInitExecutePhase(cwd, args[2], raw, { validate: epValidate });
+          const { validate: epValidate, tdd: epTdd } = parseNamedArgs(args, [], ['validate', 'tdd']);
+          init.cmdInitExecutePhase(cwd, args[2], raw, { validate: epValidate, tdd: epTdd });
           break;
         }
         case 'plan-phase': {
-          const { validate: ppValidate } = parseNamedArgs(args, [], ['validate']);
-          init.cmdInitPlanPhase(cwd, args[2], raw, { validate: ppValidate });
+          const { validate: ppValidate, tdd: ppTdd } = parseNamedArgs(args, [], ['validate', 'tdd']);
+          init.cmdInitPlanPhase(cwd, args[2], raw, { validate: ppValidate, tdd: ppTdd });
           break;
         }
         case 'new-project':
@@ -1018,7 +1045,15 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
         core.output(intel.intelQuery(term, planningDir), raw);
       } else if (subcommand === 'status') {
         const planningDir = path.join(cwd, '.planning');
-        core.output(intel.intelStatus(planningDir), raw);
+        const status = intel.intelStatus(planningDir);
+        if (!raw && status.files) {
+          for (const file of Object.values(status.files)) {
+            if (file.updated_at) {
+              file.updated_at = core.timeAgo(new Date(file.updated_at));
+            }
+          }
+        }
+        core.output(status, raw);
       } else if (subcommand === 'diff') {
         const planningDir = path.join(cwd, '.planning');
         core.output(intel.intelDiff(planningDir), raw);
@@ -1041,6 +1076,33 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
         core.output(intel.intelUpdate(planningDir), raw);
       } else {
         error('Unknown intel subcommand. Available: query, status, update, diff, snapshot, patch-meta, validate, extract-exports');
+      }
+      break;
+    }
+
+    // ─── Graphify ──────────────────────────────────────────────────────────
+
+    case 'graphify': {
+      const graphify = require('./lib/graphify.cjs');
+      const subcommand = args[1];
+      if (subcommand === 'query') {
+        const term = args[2];
+        if (!term) error('Usage: gsd-tools graphify query <term>');
+        const budgetIdx = args.indexOf('--budget');
+        const budget = budgetIdx !== -1 ? parseInt(args[budgetIdx + 1], 10) : null;
+        core.output(graphify.graphifyQuery(cwd, term, { budget }), raw);
+      } else if (subcommand === 'status') {
+        core.output(graphify.graphifyStatus(cwd), raw);
+      } else if (subcommand === 'diff') {
+        core.output(graphify.graphifyDiff(cwd), raw);
+      } else if (subcommand === 'build') {
+        if (args[2] === 'snapshot') {
+          core.output(graphify.writeSnapshot(cwd), raw);
+        } else {
+          core.output(graphify.graphifyBuild(cwd), raw);
+        }
+      } else {
+        error('Unknown graphify subcommand. Available: build, query, status, diff');
       }
       break;
     }
@@ -1109,66 +1171,38 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
     // ─── Hooks ─────────────────────────────────────────────────────────
 
     case 'hook': {
-      // args[0] is the command itself ('hook'); args[1] is the hook subtype.
-      // Historical note: this previously read args[0], which silently matched
-      // 'hook' and made the session-start migration a dead branch. Fixing the
-      // index here re-enables session-start migration and is required for the
-      // pre-compact handler below to run at all. [Rule 1 - Bug]
       const hookType = args[1]; // session-start, pre-tool-use, post-tool-use, pre-compact
       if (hookType === 'session-start') {
-        // Read hook input from stdin for source detection.
-        // Best effort: stdin may not be a readable file in every invocation
-        // (test harnesses, manual invocation). A missing/unparseable stdin is
-        // never fatal -- we just default source to 'startup'.
         let hookInput = {};
         try {
           const stdinData = fs.readFileSync(0, 'utf-8');
           if (stdinData) hookInput = JSON.parse(stdinData);
         } catch { /* stdin may not be available or parseable */ }
 
-        // Auto-migrate legacy artifacts on first session
         try {
           const migrationPath = path.join(__dirname, '..', 'migrations', 'legacy-cleanup.cjs');
           if (fs.existsSync(migrationPath)) {
             const { autoMigrate } = require(migrationPath);
             const result = autoMigrate(cwd);
             if (result.migrated) {
-              // Output as hook message so user sees what happened
               const msg = ['GSD plugin: auto-migrated legacy install:', ...result.actions.map(a => `  - ${a}`)].join('\n');
               process.stderr.write(msg + '\n');
             }
           }
         } catch { /* never break session start */ }
 
-        // HANDOFF.json detection for auto-resume (D-08, D-09, RESM-02)
-        // Only check on 'startup' and 'compact' sources.
-        // Skip on 'clear' (user intentionally cleared) and 'resume' (avoid
-        // infinite loops -- we're already in a resume flow).
-        //
-        // SessionStart hook stdout is injected as a system message into the
-        // conversation via executeHooks -> AggregatedHookResult.systemMessage,
-        // which is how we tell Claude to run /gsd-resume-work without any
-        // user interaction.
-        //
-        // Wrapped in its own try/catch so a malformed HANDOFF.json or any
-        // unexpected I/O error can never crash session start (T-04-11).
         const source = hookInput.source || 'startup';
         if (source === 'startup' || source === 'compact') {
           try {
             const { planningPaths } = require('./lib/core.cjs');
             const handoffPath = path.join(planningPaths(cwd).planning, 'HANDOFF.json');
             if (fs.existsSync(handoffPath)) {
-              // Read HANDOFF.json for phase/plan/task context in the message.
-              // Only lightweight fields are exposed in the system message
-              // (T-04-09): no uncommitted files, no full decisions log.
               const handoff = JSON.parse(fs.readFileSync(handoffPath, 'utf-8'));
               const phase = handoff.phase_name || handoff.phase || 'unknown';
               const plan = handoff.plan || '?';
               const task = handoff.task || '?';
               const handoffSource = handoff.source || 'unknown';
 
-              // stdout becomes system message for Claude (per SessionStart
-              // hook contract in executeHooks).
               const systemMsg = [
                 'GSD session continuity: Found checkpoint from previous session.',
                 `Phase: ${phase}, Plan: ${plan}, Task: ${task} (source: ${handoffSource}).`,
@@ -1177,28 +1211,14 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
               ].join(' ');
               process.stdout.write(systemMsg);
 
-              // stderr for user-visible notification so they see what's happening.
               process.stderr.write('GSD: session checkpoint detected, auto-resuming...\n');
             }
           } catch { /* never break session start */ }
         }
       } else if (hookType === 'pre-compact') {
-        // PreCompact: save checkpoint before context compaction.
-        // CRITICAL: stdout must stay EMPTY -- PreCompact stdout becomes
-        // newCustomInstructions injected into the compaction prompt
-        // (executeHooksOutsideREPL in Claude Code). Use stderr only for
-        // user-visible messages.
-        //
-        // Per D-04: best effort within 5s timeout, never crash the hook.
-        // Per D-05: writeCheckpoint always overwrites HANDOFF.json.
-        // The `source` is always "auto-compact" regardless of trigger
-        // (manual /compact vs auto) -- "manual-pause" is reserved for
-        // the /gsd-pause-work skill only.
         try {
           const checkpoint = require('./lib/checkpoint.cjs');
 
-          // Read stdin for hook input (contains trigger + session info).
-          // Best effort: stdin may not be a file in some test harnesses.
           try {
             fs.readFileSync(0, 'utf-8');
           } catch { /* stdin may not be available */ }
@@ -1210,11 +1230,9 @@ async function runCommand(command, args, cwd, raw, defaultValue) {
 
           process.stderr.write('GSD: checkpoint saved to .planning/HANDOFF.json\n');
         } catch (err) {
-          // Best effort per D-04 -- never crash the hook
           process.stderr.write('GSD: checkpoint save failed: ' + (err && err.message ? err.message : 'unknown error') + '\n');
         }
       }
-      // pre-tool-use and post-tool-use: no-op for now
       break;
     }
 

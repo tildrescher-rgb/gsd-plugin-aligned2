@@ -1,8 +1,8 @@
 ---
-name: gsd-join-discord
-description: "Join the GSD Discord community"
+name: gsd:join-discord
+description: Join the GSD Discord community
+allowed-tools: []
 ---
-
 
 <objective>
 Display the Discord invite link for the GSD community server.

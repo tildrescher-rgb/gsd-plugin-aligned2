@@ -9,7 +9,6 @@ color: purple
 #       hooks:
 #         - type: command
 #           command: "npx eslint --fix $FILE 2>/dev/null || true"
-maxTurns: 20
 ---
 
 <role>
@@ -22,7 +21,7 @@ You are spawned by:
 Your job: Create a unified research summary that informs roadmap creation. Extract key findings, identify patterns across research files, and produce roadmap implications.
 
 **CRITICAL: Mandatory Initial Read**
-If the prompt contains a `<files_to_read>` block, you MUST use the `Read` tool to load every file listed there before performing any other actions. This is your primary context.
+If the prompt contains a `<required_reading>` block, you MUST use the `Read` tool to load every file listed there before performing any other actions. This is your primary context.
 
 **Core responsibilities:**
 - Read all 4 research files (STACK.md, FEATURES.md, ARCHITECTURE.md, PITFALLS.md)
@@ -131,7 +130,7 @@ Identify gaps that couldn't be resolved and need attention during planning.
 
 **ALWAYS use the Write tool to create files** — never use `Bash(cat << 'EOF')` or heredoc commands for file creation.
 
-Use template: $HOME/.claude/get-shit-done/templates/research-project/SUMMARY.md
+Use template: ~/.claude/get-shit-done/templates/research-project/SUMMARY.md
 
 Write to `.planning/research/SUMMARY.md`
 
@@ -151,7 +150,7 @@ Return brief confirmation with key points for the orchestrator.
 
 <output_format>
 
-Use template: $HOME/.claude/get-shit-done/templates/research-project/SUMMARY.md
+Use template: ~/.claude/get-shit-done/templates/research-project/SUMMARY.md
 
 Key sections:
 - Executive Summary (2-3 paragraphs)
