@@ -782,6 +782,11 @@ function probeControllingTtyToken() {
     return cachedControllingTtyToken;
   }
 
+  // `tty` is a Unix-only binary; don't spawn a nonexistent command on Windows.
+  if (process.platform === 'win32') {
+    return cachedControllingTtyToken;
+  }
+
   try {
     const ttyPath = execFileSync('tty', [], {
       encoding: 'utf-8',
