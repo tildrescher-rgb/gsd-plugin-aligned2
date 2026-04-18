@@ -2,7 +2,21 @@
 
 **Based on:** [GSD 1.37.1](https://github.com/gsd-build/get-shit-done/releases/tag/v1.37.1) base tree by **TACHES** (Lex Christopherson)
 
+**Plugin version:** `2.37.1`
+
 A performance-optimized plugin packaging of [GSD](https://github.com/gsd-build/get-shit-done) for Claude Code. Reduces per-turn token overhead by ~92%, adds MCP-backed project state, and bundles everything into a single-install plugin.
+
+### Versioning
+
+The plugin version mirrors upstream GSD with the major bumped by one to signal that this is a derivative with extra features layered on top:
+
+```
+plugin_major = upstream_major + 1
+plugin_minor = upstream_minor
+plugin_patch = upstream_patch
+```
+
+So upstream GSD `1.37.1` ships here as plugin `2.37.1`. When upstream advances to `2.x`, this plugin will move to `3.x`. Patch-level changes that are plugin-only (not tied to an upstream sync) bump the patch number further (e.g. `2.37.2`).
 
 This project repackages the GSD workflow system as a native Claude Code plugin with additional optimizations: skill isolation via `context: fork`, structured MCP tools replacing prompt injection, and cross-session memory via memdir.
 
