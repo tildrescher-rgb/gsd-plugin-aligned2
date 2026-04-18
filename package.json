@@ -1,6 +1,6 @@
 {
   "name": "gsd-plugin",
-  "version": "1.36.0",
+  "version": "1.37.1",
   "description": "Performance-optimized plugin packaging of GSD (Get Shit Done) for Claude Code",
   "private": true,
   "scripts": {
