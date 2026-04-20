@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Phase: 5
-Plan: Not started
-Status: Phase 04 fully complete — live /compact UAT passed 2026-04-20 (manual trigger; auto-compaction test 2 remains opportunistic). v1.1 re-scoped 2026-04-20 per AUDIT-v1.1.md: Phase 05 trimmed to BKUP-01 + BKUP-02 + LIFE-01; Phase 06 dropped (deferred to v1.2).
-Last activity: 2026-04-20 - Live /compact round-trip UAT confirmed Phase 4 end-to-end
+Plan: Planned (2 plans, wave 1 parallel) — 05-01 (BKUP-01/BKUP-02) + 05-02 (LIFE-01)
+Status: Phase 5 plans written 2026-04-20. Ready for execution via /gsd:execute-phase 5.
+Last activity: 2026-04-20 - Wrote Phase 5 CONTEXT + 2 PLAN files
 
 ```
 v1.1 Progress: [===_______] 33% (1/3 phases)
@@ -90,4 +90,4 @@ None.
 
 Last session: 2026-04-20T04:27:56.349Z (auto-compact — live UAT pass)
 Stopped at: Phase 4 fully verified; ready to plan Phase 5
-Next action: `/gsd:plan-phase 5` (scope: BKUP-01, BKUP-02, LIFE-01)
+Next action: `/gsd:execute-phase 5` (or review plans in .planning/phases/05-backup-trigger-and-cleanup/ first)
