@@ -20,7 +20,7 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 
 ### v1.1 Session Continuity
 
-- [ ] **Phase 4: Checkpoint and Resume** - PreCompact hook saves state, SessionStart hook detects and auto-resumes
+- [x] **Phase 4: Checkpoint and Resume** - PreCompact hook saves state, SessionStart hook detects and auto-resumes (completed 2026-04-11)
 - [ ] **Phase 5: Backup Trigger and Lifecycle** - CLAUDE.md fallback path, checkpoint cleanup, staleness detection, manual save
 - [ ] **Phase 6: Upstream Compatibility and Documentation** - Format compatibility, versioning, patch generation, README and CHANGELOG
 
@@ -36,7 +36,12 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
   3. HANDOFF.json includes recent decisions and context notes so the resuming session can restore the mental model
   4. When a new session starts and HANDOFF.json exists, /gsd-resume-work fires automatically with zero user intervention
   5. After auto-resume, the session is positioned at the correct phase/plan/task and can continue work immediately
-**Plans**: TBD
+**Plans:** 3 plans
+
+Plans:
+- [x] 04-01-PLAN.md -- Shared checkpoint library and gsd-tools checkpoint command
+- [x] 04-02-PLAN.md -- PreCompact hook registration and pause-work refactor
+- [x] 04-03-PLAN.md -- SessionStart auto-resume enhancement
 
 ### Phase 5: Backup Trigger and Lifecycle
 **Goal**: Session continuity is robust -- works even when hooks fail, cleans up after itself, and gives users manual control
@@ -60,6 +65,7 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
   3. All session continuity changes are structured as isolated, reviewable patches (or PR-ready diffs) suitable for upstream contribution
   4. Plugin README documents the session continuity feature, its configuration options, and how it interacts with Claude Code hooks
   5. CHANGELOG reflects v1.1 changes with clear attribution to plugin vs base
+  6. `plugins/gsd/` in [davepoon/buildwithclaude](https://github.com/davepoon/buildwithclaude) is updated to v1.1 — version bumped, agents/skills synced, README updated
 **Plans**: TBD
 
 ## Progress
@@ -69,6 +75,6 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 | 1. Skill and Agent Optimization | v1.0 | 3/3 | Complete | 2026-04-01 |
 | 2. MCP Server | v1.0 | 2/2 | Complete | 2026-04-04 |
 | 3. Plugin Packaging and Memory | v1.0 | 5/5 | Complete | 2026-04-06 |
-| 4. Checkpoint and Resume | v1.1 | 0/? | Not started | - |
+| 4. Checkpoint and Resume | v1.1 | 0/3 | Planned | - |
 | 5. Backup Trigger and Lifecycle | v1.1 | 0/? | Not started | - |
 | 6. Upstream Compatibility and Documentation | v1.1 | 0/? | Not started | - |
