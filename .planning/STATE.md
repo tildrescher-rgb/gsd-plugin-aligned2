@@ -84,6 +84,7 @@ None.
 | 260419-lxi | Repo root cleanup — moved research artefacts into `_research/` | 2026-04-19 | — | [260419-lxi-repo-root-cleanup](./quick/260419-lxi-repo-root-cleanup/) |
 | 260420-7js | Upgrade gsd-plugin to upstream GSD 1.38.1 (plugin v2.38.1) and publish GitHub release | 2026-04-20 | 08477e0 | [260420-7js-upgrade-gsd-plugin-to-version-1-38-1-mat](./quick/260420-7js-upgrade-gsd-plugin-to-version-1-38-1-mat/) |
 | 260420-7tx | Include release notes body in upstream release notification mail | 2026-04-20 | c43a67c | [260420-7tx-cron-release-notes-in-mail](./quick/260420-7tx-cron-release-notes-in-mail/) |
+| 260420-rar | Advertise auto-resume across `/compact` in README features list | 2026-04-20 | 21ee182 | [260420-rar-readme-autoresume-feature](./quick/260420-rar-readme-autoresume-feature/) |
 
 ## Session Continuity
 
