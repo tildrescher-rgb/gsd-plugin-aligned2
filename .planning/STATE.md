@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 Phase: 5
 Plan: Not started
 Status: Phase 04 complete (human UAT partial — live /compact test pending), ready for Phase 05
-Last activity: 2026-04-20 - Completed quick task 260420-7js: Upgrade gsd-plugin to upstream GSD 1.38.1 (plugin v2.38.1) and publish GitHub release
+Last activity: 2026-04-20 - Completed quick task 260420-7tx: Include release notes body in upstream release notification mail
 
 ```
 v1.1 Progress: [===_______] 33% (1/3 phases)
@@ -83,6 +83,7 @@ None.
 | 260418-s8i | rtk spike: install + per-command A/B — verdict: do NOT bundle/recommend (breaks gsd-code-reviewer + find pipelines) | 2026-04-18 | — | [260418-s8i-rtk-spike](./quick/260418-s8i-rtk-spike/) |
 | 260419-lxi | Repo root cleanup — moved research artefacts into `_research/` | 2026-04-19 | — | [260419-lxi-repo-root-cleanup](./quick/260419-lxi-repo-root-cleanup/) |
 | 260420-7js | Upgrade gsd-plugin to upstream GSD 1.38.1 (plugin v2.38.1) and publish GitHub release | 2026-04-20 | 08477e0 | [260420-7js-upgrade-gsd-plugin-to-version-1-38-1-mat](./quick/260420-7js-upgrade-gsd-plugin-to-version-1-38-1-mat/) |
+| 260420-7tx | Include release notes body in upstream release notification mail | 2026-04-20 | c43a67c | [260420-7tx-cron-release-notes-in-mail](./quick/260420-7tx-cron-release-notes-in-mail/) |
 
 ## Session Continuity
 
