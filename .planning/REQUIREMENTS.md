@@ -8,7 +8,7 @@
 - [x] **CKPT-03**: HANDOFF.json includes recent decisions and context notes for mental model restoration — Phase 4
 
 ### Auto-Resume
-- [x] **RESM-01**: SessionStart hook detects HANDOFF.json and triggers /gsd-resume-work — Phase 4
+- [x] **RESM-01**: SessionStart hook detects HANDOFF.json and triggers /gsd:resume-work — Phase 4
 - [x] **RESM-02**: Auto-resume continues work with zero user intervention after context reset — Phase 4 (synthetic; live `/compact` UAT pending)
 - [x] **RESM-03**: Resume restores full project state including phase/plan position — Phase 4
 
@@ -23,14 +23,14 @@
 
 ### Checkpoint Lifecycle polish
 - **LIFE-02**: Stale checkpoints (older than configurable threshold) are detected and handled — *deferred. Nice-to-have; current resume is always-accept.*
-- **LIFE-03**: User can manually trigger checkpoint save via dedicated command — *deferred. `/gsd-pause-work` + `node bin/gsd-tools.cjs checkpoint --source manual-pause` already satisfy the manual-trigger need; a dedicated `/gsd-checkpoint` skill is polish.*
+- **LIFE-03**: User can manually trigger checkpoint save via dedicated command — *deferred. `/gsd:pause-work` + `node bin/gsd-tools.cjs checkpoint --source manual-pause` already satisfy the manual-trigger need; a dedicated `/gsd-checkpoint` skill is polish.*
 
 ### Documentation
 - **DOCS-01**: Plugin README documents session continuity feature and configuration — *deferred. One paragraph; rides the next README update pass.*
 - **DOCS-02**: CHANGELOG tracks v1.1 changes relative to both plugin version and GSD base version — *deferred. Release history currently lives in git + GitHub Releases.*
 
 ### Upstream Compatibility
-- **UPST-01**: HANDOFF.json format compatible with upstream `/gsd-pause-work` — *deferred. Needs re-assessment: upstream's 1.34→1.38.x evolution changed the compat target.*
+- **UPST-01**: HANDOFF.json format compatible with upstream `/gsd:pause-work` — *deferred. Needs re-assessment: upstream's 1.34→1.38.x evolution changed the compat target.*
 - **UPST-03**: Changes packaged as isolated upstream-ready patches — *deferred pending UPST-01.*
 - **UPST-04**: Patch files / PR-ready diff prepared for upstream — *deferred pending UPST-01.*
 

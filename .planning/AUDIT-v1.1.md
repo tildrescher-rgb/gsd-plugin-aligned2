@@ -26,14 +26,14 @@ Completion snapshot:
 | CKPT-01 | 4 | SATISFIED | PreCompact hook writes HANDOFF.json with all 19 fields (04-VERIFICATION.md §Observable Truths #1, spot check 4). |
 | CKPT-02 | 4 | SATISFIED | `uncommitted_files`, `next_action` populated from `git status --porcelain` + STATE.md (spot check 2). |
 | CKPT-03 | 4 | SATISFIED | `context_notes` from STATE.md + recent commits; `decisions` extracted from Accumulated Context section. |
-| RESM-01 | 4 | SATISFIED | SessionStart hook emits systemMsg pointing to `/gsd-resume-work`. |
-| RESM-02 | 4 | SATISFIED | Zero-intervention directive contractually verified AND confirmed live 2026-04-20: manual `/compact` → HANDOFF.json (source=auto-compact) → SessionStart systemMessage → Claude invoked `/gsd-resume-work` with no user prompt (04-HUMAN-UAT.md test 1). |
+| RESM-01 | 4 | SATISFIED | SessionStart hook emits systemMsg pointing to `/gsd:resume-work`. |
+| RESM-02 | 4 | SATISFIED | Zero-intervention directive contractually verified AND confirmed live 2026-04-20: manual `/compact` → HANDOFF.json (source=auto-compact) → SessionStart systemMessage → Claude invoked `/gsd:resume-work` with no user prompt (04-HUMAN-UAT.md test 1). |
 | RESM-03 | 4 | SATISFIED | systemMsg embeds phase/plan/task from HANDOFF.json. |
 | BKUP-01 | 5 | **OPEN** | CLAUDE.md has no HANDOFF.json check instruction. Template `templates/claude-md.md` unchanged. |
 | BKUP-02 | 5 | **OPEN** | No hook-independent fallback path. |
-| LIFE-01 | 5 | **OPEN** | HANDOFF.json not auto-deleted after resume. `/gsd-resume-work` doesn't clear it. |
+| LIFE-01 | 5 | **OPEN** | HANDOFF.json not auto-deleted after resume. `/gsd:resume-work` doesn't clear it. |
 | LIFE-02 | 5 | **OPEN** | No staleness threshold check in `bin/lib/checkpoint.cjs`. |
-| LIFE-03 | 5 | **Partially covered** | `/gsd-pause-work` + `node bin/gsd-tools.cjs checkpoint --source manual-pause` already exist. No dedicated `/gsd-checkpoint` skill, but the manual trigger mechanism is live. Could be declared SATISFIED depending on strict reading. |
+| LIFE-03 | 5 | **Partially covered** | `/gsd:pause-work` + `node bin/gsd-tools.cjs checkpoint --source manual-pause` already exist. No dedicated `/gsd-checkpoint` skill, but the manual trigger mechanism is live. Could be declared SATISFIED depending on strict reading. |
 | DOCS-01 | 6 | **OPEN** | README.md has zero mentions of session continuity, HANDOFF, PreCompact, or resume-work. |
 | DOCS-02 | 6 | **OPEN** | No CHANGELOG.md exists. Version history lives only in git + GitHub release notes. |
 | UPST-01 | 6 | **OPEN** | HANDOFF.json format compat with upstream pause-work never validated. |
@@ -51,7 +51,7 @@ Not applicable — only Phase 4 is implemented. Integration check is deferred un
 
 1. **The core `/compact` round-trip was never live-tested.** Phase 4 passes all 9 synthetic spot checks, but the pipeline from `executeHooksOutsideREPL → newCustomInstructions` (PreCompact) and `executeHooks → AggregatedHookResult.systemMessage` (SessionStart) is only exercised by a real compaction event. This is the explicit gap flagged in `04-VERIFICATION.md` and `04-HUMAN-UAT.md`. No evidence that a live test has been run in the 9 days since verification.
 
-2. **Phase 5 work is still valuable despite upstream 1.38.x.** Upstream's new features in 1.38.0/1.38.1 (`gsd-read-injection-scanner`, SDK auto-install, `/gsd-ingest-docs`, `/gsd-ultraplan-phase`) are **orthogonal** to session continuity — none of them address HANDOFF lifecycle, CLAUDE.md fallback, or staleness. The plugin's session-continuity surface area is still unique.
+2. **Phase 5 work is still valuable despite upstream 1.38.x.** Upstream's new features in 1.38.0/1.38.1 (`gsd-read-injection-scanner`, SDK auto-install, `/gsd:ingest-docs`, `/gsd:ultraplan-phase`) are **orthogonal** to session continuity — none of them address HANDOFF lifecycle, CLAUDE.md fallback, or staleness. The plugin's session-continuity surface area is still unique.
 
 3. **Phase 6 partly stale.** UPST-01/03/04 assume the plugin will upstream its session-continuity work. Quick task 260411-12i already drafted a Discussions post (commit 35375e7). Upstream's trajectory (checkpoint primitives added to the SDK in some form during 1.34-1.38.x) may have changed what "upstream-compat" should look like. Deserves a revisit before planning.
 

@@ -13,7 +13,7 @@ Phase 4 made the PreCompact → HANDOFF.json → SessionStart → auto-resume ro
 
 2. **Checkpoint cleanup (LIFE-01).** HANDOFF.json is currently never deleted after resume. It sits on disk forever, causing SessionStart to re-fire the resume systemMessage on every subsequent session until the file is manually removed. Verified: the 2026-04-20T04:27:56Z HANDOFF.json from this morning's /compact is still on disk right now.
 
-Deliberately out of scope (deferred to v1.2 per 2026-04-20 audit): LIFE-02 (staleness detection), LIFE-03 (dedicated `/gsd-checkpoint` skill — `/gsd-pause-work` already covers the manual path), DOCS-01/02 (README + CHANGELOG), UPST-01/03/04 (upstream compat; needs direction review first).
+Deliberately out of scope (deferred to v1.2 per 2026-04-20 audit): LIFE-02 (staleness detection), LIFE-03 (dedicated `/gsd-checkpoint` skill — `/gsd:pause-work` already covers the manual path), DOCS-01/02 (README + CHANGELOG), UPST-01/03/04 (upstream compat; needs direction review first).
 
 </domain>
 
@@ -110,7 +110,7 @@ Helper export: **`deleteCheckpoint(cwd)`** returning **`{ deleted: boolean, path
 ## Deferred Ideas
 
 - **LIFE-02 (staleness detection)** — would check HANDOFF.json timestamp and refuse resume if too old. Deferred to v1.2.
-- **LIFE-03 (`/gsd-checkpoint` skill)** — `/gsd-pause-work` + `gsd-tools checkpoint` already cover the manual path; no dedicated skill needed.
+- **LIFE-03 (`/gsd-checkpoint` skill)** — `/gsd:pause-work` + `gsd-tools checkpoint` already cover the manual path; no dedicated skill needed.
 - **Archiving deleted HANDOFF.json** — e.g., moving to `.planning/handoffs/YYYY-MM-DD-hash.json` for audit. Not requested; LIFE-01 explicitly says "deleted". Straight delete.
 - **Detecting hook-vs-fallback path** — interesting observability (does BKUP-02 ever trigger in practice?), but no requirement.
 
