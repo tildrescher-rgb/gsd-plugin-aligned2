@@ -379,6 +379,40 @@ function writeCheckpoint(cwd, options = {}) {
   return data;
 }
 
+// ─── deleteCheckpoint ────────────────────────────────────────────────────────
+
+/**
+ * Remove `.planning/HANDOFF.json` if it exists.
+ *
+ * Idempotent: returning `{ deleted: false }` when the file is not present is a
+ * success, not a failure. Callers (resume skill, CLI) can ignore the return value.
+ *
+ * Never throws — LIFE-01 says the file must be gone after resume; failing loudly
+ * would turn a lifecycle hygiene step into a user-visible error on the happy path.
+ *
+ * @param {string} cwd - project root directory
+ * @returns {{ deleted: boolean, path: string, error?: string }}
+ */
+function deleteCheckpoint(cwd) {
+  let outPath;
+  try {
+    outPath = path.join(planningPaths(cwd).planning, 'HANDOFF.json');
+  } catch (err) {
+    return { deleted: false, path: '', error: err && err.message ? err.message : 'planningPaths failed' };
+  }
+
+  if (!fs.existsSync(outPath)) {
+    return { deleted: false, path: outPath };
+  }
+
+  try {
+    fs.unlinkSync(outPath);
+    return { deleted: true, path: outPath };
+  } catch (err) {
+    return { deleted: false, path: outPath, error: err && err.message ? err.message : 'unlink failed' };
+  }
+}
+
 // ─── CLI command handler ─────────────────────────────────────────────────────
 
 /**
@@ -386,6 +420,27 @@ function writeCheckpoint(cwd, options = {}) {
  * Writes HANDOFF.json and emits the data as JSON on stdout.
  */
 function cmdCheckpoint(cwd, args, raw) {
+  // --clear branch: delete HANDOFF.json instead of writing one (LIFE-01).
+  // This must come before any other flag parsing — --clear is a mode switch,
+  // not a modifier, and the writeCheckpoint path below must be unreachable
+  // when --clear is set.
+  if (args.includes('--clear')) {
+    const result = deleteCheckpoint(cwd);
+    if (result.deleted) {
+      try {
+        process.stderr.write('GSD: checkpoint cleared from .planning/HANDOFF.json\n');
+      } catch { /* stderr closed — ignore */ }
+    } else if (result.error) {
+      try {
+        process.stderr.write('GSD: checkpoint clear failed: ' + result.error + '\n');
+      } catch { /* stderr closed — ignore */ }
+    }
+    // If neither deleted nor errored, the file simply wasn't there — that's
+    // success (idempotent per LIFE-01 / D-09).
+    output(result, raw);
+    return;
+  }
+
   // Parse --source flag (default: manual-pause)
   let source = 'manual-pause';
   const sourceIdx = args.indexOf('--source');
@@ -415,5 +470,6 @@ function cmdCheckpoint(cwd, args, raw) {
 module.exports = {
   generateCheckpoint,
   writeCheckpoint,
+  deleteCheckpoint,
   cmdCheckpoint,
 };
