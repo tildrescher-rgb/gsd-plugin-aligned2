@@ -21,7 +21,7 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 ### v1.1 Session Continuity
 
 - [x] **Phase 4: Checkpoint and Resume** - PreCompact hook saves state, SessionStart hook detects and auto-resumes (completed 2026-04-11; live `/compact` UAT passed 2026-04-20)
-- [ ] **Phase 5: Backup Trigger and Cleanup** - CLAUDE.md fallback path + HANDOFF.json cleanup after resume (re-scoped 2026-04-20; planned 2026-04-20 — 2 plans, wave 1 parallel)
+- [x] **Phase 5: Backup Trigger and Cleanup** - CLAUDE.md fallback path + HANDOFF.json cleanup after resume (completed 2026-04-20 — 2 plans executed in parallel)
 - [~] **Phase 6: Upstream Compatibility and Documentation** - **Dropped from v1.1.** Upstream GSD 1.34→1.38.x evolved independently of the session-continuity primitives this phase assumed; compat scope needs a rethink before planning. Deferred to v1.2.
 
 ## Phase Details
@@ -54,7 +54,7 @@ Plans:
 **Plans**: TBD
 
 **Plans:** 2 plans
-- [ ] 05-01-PLAN.md -- CLAUDE.md session-continuity fallback section (BKUP-01, BKUP-02)
+- [x] 05-01-PLAN.md -- CLAUDE.md session-continuity fallback section (BKUP-01, BKUP-02) — completed 2026-04-20
 - [x] 05-02-PLAN.md -- HANDOFF.json cleanup after resume (LIFE-01) — completed 2026-04-20
 
 **Deferred out of this phase (moved to v1.2 backlog):**
@@ -78,5 +78,5 @@ Plans:
 | 2. MCP Server | v1.0 | 2/2 | Complete | 2026-04-04 |
 | 3. Plugin Packaging and Memory | v1.0 | 5/5 | Complete | 2026-04-06 |
 | 4. Checkpoint and Resume | v1.1 | 3/3 | Complete (live UAT 1 passed 2026-04-20) | 2026-04-11 |
-| 5. Backup Trigger and Cleanup | v1.1 | 1/2 | In progress (Plan 05-02 complete; Plan 05-01 pending) | - |
+| 5. Backup Trigger and Cleanup | v1.1 | 2/2 | Complete (both plans executed in parallel) | 2026-04-20 |
 | 6. Upstream Compatibility and Documentation | v1.1 | — | Dropped (deferred to v1.2) | - |

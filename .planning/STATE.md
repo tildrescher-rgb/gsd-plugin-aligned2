@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Session Continuity
-status: executing
-stopped_at: Phase 5 Plan 02 complete (LIFE-01 closed); Plan 05-01 (BKUP-01/BKUP-02) still pending
-last_updated: "2026-04-20T05:12:50Z"
+status: milestone-complete
+stopped_at: Phase 5 complete (BKUP-01, BKUP-02, LIFE-01 all satisfied) — v1.1 done; Phase 6 was dropped 2026-04-20
+last_updated: "2026-04-20T05:15:00Z"
 last_activity: 2026-04-20
 progress:
-  total_phases: 3
-  completed_phases: 1
+  total_phases: 2
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
-  percent: 80
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -25,13 +25,13 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 
 ## Current Position
 
-Phase: 5
-Plan: 05-02 complete (LIFE-01 closed 2026-04-20); 05-01 (BKUP-01/BKUP-02) pending
-Status: Phase 5 Plan 02 executed 2026-04-20 (commits 8228e7c + f699947). Plan 05-01 is the remaining wave-1 work.
-Last activity: 2026-04-20 — Executed Plan 05-02 end-to-end (~108s); deleteCheckpoint helper + --clear CLI + self-contained resume skill
+Phase: 5 — complete
+Plan: 05-01 ✓ (BKUP-01/BKUP-02 closed, commits e313942 + dc6865d + 5bdc7fc + cde38f4 + 22389f1) · 05-02 ✓ (LIFE-01 closed, commits 8228e7c + f699947 + 210e202)
+Status: v1.1 milestone complete — all 3 active-scope requirements satisfied (Phase 6 was dropped 2026-04-20). Ready for milestone audit/ship.
+Last activity: 2026-04-20 — Both Phase 5 plans executed in parallel (~8 min wall clock)
 
 ```
-v1.1 Progress: [=====_____] 50% (1.5/3 phases — Plan 05-02 done, 05-01 pending)
+v1.1 Progress: [==========] 100% (2/2 active phases — Phase 6 deferred to v1.2)
 ```
 
 ## Performance Metrics
@@ -89,6 +89,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-20T05:12:50Z (Plan 05-02 execution)
-Stopped at: Plan 05-02 complete (LIFE-01 closed). Plan 05-01 (CLAUDE.md session-continuity fallback section, BKUP-01/BKUP-02) is the remaining work in Phase 5.
-Next action: Execute Plan 05-01 via `/gsd:execute-phase 5` (or directly with the Plan 05-01 PLAN.md file), or review its context in `.planning/phases/05-backup-trigger-and-cleanup/05-01-PLAN.md`.
+Last session: 2026-04-20T05:15:00Z (Phase 5 complete, v1.1 milestone closed)
+Stopped at: Phase 5 fully executed; all active v1.1 requirements (BKUP-01, BKUP-02, LIFE-01, plus the earlier CKPT-01..03 / RESM-01..03) satisfied. Phase 6 was dropped 2026-04-20.
+Next action: `/gsd:audit-milestone v1.1` to confirm coverage before shipping, or `/gsd:complete-milestone` to archive and open v1.2.
