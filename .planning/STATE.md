@@ -86,6 +86,7 @@ None.
 | 260420-7tx | Include release notes body in upstream release notification mail | 2026-04-20 | c43a67c | [260420-7tx-cron-release-notes-in-mail](./quick/260420-7tx-cron-release-notes-in-mail/) |
 | 260420-rar | Advertise auto-resume across `/compact` in README features list | 2026-04-20 | 21ee182 | [260420-rar-readme-autoresume-feature](./quick/260420-rar-readme-autoresume-feature/) |
 | 260420-vfb | Hook commands fall back to newest cached plugin version when baked `${CLAUDE_PLUGIN_ROOT}` is pruned | 2026-04-20 | 7a80d47 | [260420-vfb-hook-version-fallback](./quick/260420-vfb-hook-version-fallback/) |
+| 260420-cns | Rewrite `/gsd-<skill>` → `/gsd:<skill>` across plugin content (273 replacements, 100 files) | 2026-04-20 | 5dfbbd2 | [260420-cns-command-colon-fix](./quick/260420-cns-command-colon-fix/) |
 
 ## Session Continuity
 
