@@ -22,6 +22,16 @@ Loaded on demand by GSD commands.
 Loaded on demand by GSD commands.
 <!-- GSD:architecture-end -->
 
+<!-- GSD:session-continuity-start source:GSD defaults -->
+## Session Continuity
+
+If `.planning/HANDOFF.json` exists at the start of a session, a previous session was interrupted (for example by `/compact` or `/gsd:pause-work`) and its state is captured there.
+
+Run `/gsd:resume-work` immediately — before anything else, without waiting for user input. The resume skill will restore context, show project status, and clean up the handoff file.
+
+This instruction is a backup path. When the SessionStart hook fires it emits the same directive via systemMessage; either trigger is sufficient.
+<!-- GSD:session-continuity-end -->
+
 <!-- GSD:workflow-start source:GSD defaults -->
 ## GSD Workflow Enforcement
 
