@@ -3,7 +3,7 @@
 ## Milestones
 
 - [x] **v1.0 MVP** -- Phases 1-3 (shipped 2026-04-06)
-- [ ] **v1.1 Session Continuity** -- Phases 4-6
+- [ ] **v1.1 Session Continuity** -- Phases 4-5 (re-scoped 2026-04-20 per `.planning/AUDIT-v1.1.md`; Phase 6 dropped, deferred to v1.2)
 
 ## Phases
 
@@ -21,8 +21,8 @@ Full details: [milestones/v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
 ### v1.1 Session Continuity
 
 - [x] **Phase 4: Checkpoint and Resume** - PreCompact hook saves state, SessionStart hook detects and auto-resumes (completed 2026-04-11)
-- [ ] **Phase 5: Backup Trigger and Lifecycle** - CLAUDE.md fallback path, checkpoint cleanup, staleness detection, manual save
-- [ ] **Phase 6: Upstream Compatibility and Documentation** - Format compatibility, versioning, patch generation, README and CHANGELOG
+- [ ] **Phase 5: Backup Trigger and Cleanup** - CLAUDE.md fallback path + HANDOFF.json cleanup after resume (re-scoped 2026-04-20)
+- [~] **Phase 6: Upstream Compatibility and Documentation** - **Dropped from v1.1.** Upstream GSD 1.34→1.38.x evolved independently of the session-continuity primitives this phase assumed; compat scope needs a rethink before planning. Deferred to v1.2.
 
 ## Phase Details
 
@@ -43,30 +43,28 @@ Plans:
 - [x] 04-02-PLAN.md -- PreCompact hook registration and pause-work refactor
 - [x] 04-03-PLAN.md -- SessionStart auto-resume enhancement
 
-### Phase 5: Backup Trigger and Lifecycle
-**Goal**: Session continuity is robust -- works even when hooks fail, cleans up after itself, and gives users manual control
+### Phase 5: Backup Trigger and Cleanup
+**Goal**: Session continuity survives hook-pipeline failures (CLAUDE.md fallback) and cleans up after itself (HANDOFF.json deletion after resume). Deliberately trimmed from original scope — staleness detection and manual-save polish deferred to v1.2.
 **Depends on**: Phase 4
-**Requirements**: BKUP-01, BKUP-02, LIFE-01, LIFE-02, LIFE-03
+**Requirements**: BKUP-01, BKUP-02, LIFE-01
 **Success Criteria** (what must be TRUE):
   1. CLAUDE.md contains an instruction that causes Claude to check for HANDOFF.json at session start, independent of the SessionStart hook
   2. If SessionStart hook does not fire, the CLAUDE.md instruction alone is sufficient to trigger resume
   3. After successful resume, HANDOFF.json is deleted so subsequent sessions start fresh
-  4. Stale checkpoints (older than a configurable threshold) are detected and handled rather than blindly resumed
-  5. User can manually trigger a checkpoint save via a GSD command at any time, not only during PreCompact
 **Plans**: TBD
 
-### Phase 6: Upstream Compatibility and Documentation
-**Goal**: Session continuity feature is documented, versioned clearly, and packaged as patches ready for upstream GSD contribution
-**Depends on**: Phase 5
-**Requirements**: UPST-01, UPST-02, UPST-03, UPST-04, DOCS-01, DOCS-02
-**Success Criteria** (what must be TRUE):
-  1. The HANDOFF.json format produced by the plugin is compatible with upstream GSD's existing /gsd-pause-work checkpoint format
-  2. Plugin version (v1.1) and GSD base version (1.33.0) are clearly distinguished in README, CHANGELOG, and any version-reporting output
-  3. All session continuity changes are structured as isolated, reviewable patches (or PR-ready diffs) suitable for upstream contribution
-  4. Plugin README documents the session continuity feature, its configuration options, and how it interacts with Claude Code hooks
-  5. CHANGELOG reflects v1.1 changes with clear attribution to plugin vs base
-  6. `plugins/gsd/` in [davepoon/buildwithclaude](https://github.com/davepoon/buildwithclaude) is updated to v1.1 — version bumped, agents/skills synced, README updated
-**Plans**: TBD
+**Deferred out of this phase (moved to v1.2 backlog):**
+- LIFE-02 (staleness threshold detection)
+- LIFE-03 (dedicated /gsd-checkpoint command — `/gsd-pause-work` + `gsd-tools.cjs checkpoint` already cover the manual path)
+
+### Phase 6: Upstream Compatibility and Documentation *(DROPPED from v1.1)*
+**Status**: Dropped 2026-04-20. Rationale in `.planning/AUDIT-v1.1.md` §Key findings #3. Upstream GSD moved independently between 1.34 and 1.38.x (added its own SDK-registered handlers, read-injection scanner, ingest-docs surface), so "compat" no longer has a stable target. Will be revisited in v1.2 after assessing upstream's current direction.
+
+**Requirements rehomed:**
+- DOCS-01 (README session-continuity paragraph) → **v1.2 backlog** (trivial; rides next README update)
+- DOCS-02 (CHANGELOG.md) → **v1.2 backlog**
+- UPST-01, UPST-03, UPST-04 → **v1.2 backlog** (need upstream-direction review first)
+- UPST-02 (version distinction in artifacts) → already SATISFIED by 260418-r6d versioning scheme; close as done.
 
 ## Progress
 
@@ -75,6 +73,6 @@ Plans:
 | 1. Skill and Agent Optimization | v1.0 | 3/3 | Complete | 2026-04-01 |
 | 2. MCP Server | v1.0 | 2/2 | Complete | 2026-04-04 |
 | 3. Plugin Packaging and Memory | v1.0 | 5/5 | Complete | 2026-04-06 |
-| 4. Checkpoint and Resume | v1.1 | 0/3 | Planned | - |
-| 5. Backup Trigger and Lifecycle | v1.1 | 0/? | Not started | - |
-| 6. Upstream Compatibility and Documentation | v1.1 | 0/? | Not started | - |
+| 4. Checkpoint and Resume | v1.1 | 3/3 | Complete (1 live UAT pending) | 2026-04-11 |
+| 5. Backup Trigger and Cleanup | v1.1 | 0/? | Not started (trimmed scope) | - |
+| 6. Upstream Compatibility and Documentation | v1.1 | — | Dropped (deferred to v1.2) | - |

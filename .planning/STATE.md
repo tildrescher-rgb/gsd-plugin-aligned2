@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 
 Phase: 5
 Plan: Not started
-Status: Phase 04 complete (human UAT partial — live /compact test pending), ready for Phase 05
-Last activity: 2026-04-20 - Completed quick task 260420-7tx: Include release notes body in upstream release notification mail
+Status: Phase 04 complete (live /compact UAT still pending). v1.1 re-scoped 2026-04-20 per AUDIT-v1.1.md: Phase 05 trimmed to BKUP-01 + BKUP-02 + LIFE-01; Phase 06 dropped (deferred to v1.2).
+Last activity: 2026-04-20 - Re-scoped v1.1 milestone after audit (Phase 6 dropped, Phase 5 trimmed)
 
 ```
 v1.1 Progress: [===_______] 33% (1/3 phases)
