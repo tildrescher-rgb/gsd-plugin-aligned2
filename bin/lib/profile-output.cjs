@@ -931,13 +931,14 @@ function cmdGenerateClaudeProfile(cwd, options, raw) {
 }
 
 function cmdGenerateClaudeMd(cwd, options, raw) {
-  const MANAGED_SECTIONS = ['project', 'stack', 'conventions', 'architecture', 'skills', 'workflow'];
+  const MANAGED_SECTIONS = ['project', 'stack', 'conventions', 'architecture', 'skills', 'session-continuity', 'workflow'];
   const generators = {
     project: generateProjectSection,
     stack: generateStackSection,
     conventions: generateConventionsSection,
     architecture: generateArchitectureSection,
     skills: generateSkillsSection,
+    'session-continuity': generateSessionContinuitySection,
     workflow: generateWorkflowSection,
   };
   const sectionHeadings = {
@@ -946,6 +947,7 @@ function cmdGenerateClaudeMd(cwd, options, raw) {
     conventions: '## Conventions',
     architecture: '## Architecture',
     skills: '## Project Skills',
+    'session-continuity': '## Session Continuity',
     workflow: '## GSD Workflow Enforcement',
   };
 
