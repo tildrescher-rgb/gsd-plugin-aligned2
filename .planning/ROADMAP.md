@@ -55,7 +55,7 @@ Plans:
 
 **Plans:** 2 plans
 - [ ] 05-01-PLAN.md -- CLAUDE.md session-continuity fallback section (BKUP-01, BKUP-02)
-- [ ] 05-02-PLAN.md -- HANDOFF.json cleanup after resume (LIFE-01)
+- [x] 05-02-PLAN.md -- HANDOFF.json cleanup after resume (LIFE-01) — completed 2026-04-20
 
 **Deferred out of this phase (moved to v1.2 backlog):**
 - LIFE-02 (staleness threshold detection)
@@ -78,5 +78,5 @@ Plans:
 | 2. MCP Server | v1.0 | 2/2 | Complete | 2026-04-04 |
 | 3. Plugin Packaging and Memory | v1.0 | 5/5 | Complete | 2026-04-06 |
 | 4. Checkpoint and Resume | v1.1 | 3/3 | Complete (live UAT 1 passed 2026-04-20) | 2026-04-11 |
-| 5. Backup Trigger and Cleanup | v1.1 | 0/2 | Planned (2 plans, wave 1 parallel) | - |
+| 5. Backup Trigger and Cleanup | v1.1 | 1/2 | In progress (Plan 05-02 complete; Plan 05-01 pending) | - |
 | 6. Upstream Compatibility and Documentation | v1.1 | — | Dropped (deferred to v1.2) | - |

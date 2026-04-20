@@ -17,7 +17,7 @@
 - [ ] **BKUP-02**: Backup instruction works independently of hooks (fallback path) — Phase 5
 
 ### Checkpoint Lifecycle
-- [ ] **LIFE-01**: HANDOFF.json is deleted after successful resume — Phase 5
+- [x] **LIFE-01**: HANDOFF.json is deleted after successful resume — Phase 5
 
 ## Future Requirements (deferred to v1.2 per 2026-04-20 audit)
 
@@ -55,7 +55,7 @@
 | RESM-03 | Phase 4 | Satisfied |
 | BKUP-01 | Phase 5 | Pending |
 | BKUP-02 | Phase 5 | Pending |
-| LIFE-01 | Phase 5 | Pending |
+| LIFE-01 | Phase 5 | Satisfied (2026-04-20, commits 8228e7c + f699947) |
 | LIFE-02 | v1.2 backlog | Deferred |
 | LIFE-03 | v1.2 backlog | Deferred |
 | DOCS-01 | v1.2 backlog | Deferred |
