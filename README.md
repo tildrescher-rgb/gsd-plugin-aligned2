@@ -51,6 +51,7 @@ That's it. This installs everything: slash commands, agent definitions, hooks, a
 - **21 agent definitions** for specialized workflow roles (planner, executor, researcher, verifier, etc.)
 - **MCP server** exposing project state as queryable resources and mutation tools
 - **Hooks** for session-start context loading, workflow enforcement, checkpoint on compact, and tool-use monitoring
+- **Auto-resume across `/compact`** -- PreCompact hook writes `.planning/HANDOFF.json`; on the next session, SessionStart auto-invokes `/gsd:resume-work` so Claude continues at the same phase/plan/task with zero manual intervention
 - **Execution context profiles** (dev, research, review) for role-specific behavior
 - **Templates and references** for planning artifacts, summaries, verification checklists, and thinking-model guidance
 - **Memory integration** -- phase outcomes persist across sessions via Claude Code's memdir
