@@ -13,8 +13,8 @@
 - [x] **RESM-03**: Resume restores full project state including phase/plan position — Phase 4
 
 ### Backup Trigger
-- [ ] **BKUP-01**: CLAUDE.md contains instruction to check for HANDOFF.json at session start — Phase 5
-- [ ] **BKUP-02**: Backup instruction works independently of hooks (fallback path) — Phase 5
+- [x] **BKUP-01**: CLAUDE.md contains instruction to check for HANDOFF.json at session start — Phase 5
+- [x] **BKUP-02**: Backup instruction works independently of hooks (fallback path) — Phase 5
 
 ### Checkpoint Lifecycle
 - [x] **LIFE-01**: HANDOFF.json is deleted after successful resume — Phase 5
@@ -53,8 +53,8 @@
 | RESM-01 | Phase 4 | Satisfied |
 | RESM-02 | Phase 4 | Satisfied (live UAT pending) |
 | RESM-03 | Phase 4 | Satisfied |
-| BKUP-01 | Phase 5 | Pending |
-| BKUP-02 | Phase 5 | Pending |
+| BKUP-01 | Phase 5 | Satisfied (2026-04-20, commits e313942 + dc6865d + cde38f4) |
+| BKUP-02 | Phase 5 | Satisfied (2026-04-20, commits e313942 + dc6865d + cde38f4) |
 | LIFE-01 | Phase 5 | Satisfied (2026-04-20, commits 8228e7c + f699947) |
 | LIFE-02 | v1.2 backlog | Deferred |
 | LIFE-03 | v1.2 backlog | Deferred |
