@@ -84,7 +84,7 @@ Shipped v1.1 with 2 phases, 5 plans, plus 4 structurally related quick tasks ove
 Tech stack: Node.js CJS (bin/lib), MCP server (stdio JSON-RPC), Claude Code plugin system.
 ~14k LOC in bin/*.cjs, ~573 LOC MCP server, 81 self-contained skill files (~21k LOC).
 Published as [jnuyens/gsd-plugin](https://github.com/jnuyens/gsd-plugin) on GitHub.
-Based on [GSD 1.38.1](https://github.com/gsd-build/get-shit-done) by TACHES (Lex Christopherson).
+Based on [GSD 1.38.3](https://github.com/gsd-build/get-shit-done) by TACHES (Lex Christopherson).
 
 ## Constraints
 
@@ -133,4 +133,4 @@ This document evolves at phase transitions and milestone boundaries.
 5. Smoke-test: `node -e "require('./bin/lib/core.cjs')"` + verify local patches (resolveGsdRoot, resolveGsdDataDir, resolveGsdAsset)
 
 ---
-*Last updated: 2026-04-20 — v1.2 Upstream Resilience kickoff.*
+*Last updated: 2026-04-21 — upstream sync to GSD 1.38.3 (plugin 2.38.3).*
