@@ -131,6 +131,8 @@ This document evolves at phase transitions and milestone boundaries.
 3. **Update README.md**: bump "Based on" version line, update skill/agent counts, add/update feature descriptions for new upstream capabilities
 4. Update this file's Context section (`Based on [GSD x.y.z]`)
 5. Smoke-test: `node -e "require('./bin/lib/core.cjs')"` + verify local patches (resolveGsdRoot, resolveGsdDataDir, resolveGsdAsset)
+6. Run `node bin/maintenance/rewrite-command-namespace.cjs` to normalize any new `/gsd-<skill>` references upstream introduced to the plugin's `/gsd:<skill>` form.
+7. **Run `UPSTREAM_VERSION=v1.x.y node bin/maintenance/check-upstream-schema.cjs`** (use the just-synced version) to confirm upstream's `/gsd:pause-work` declared fields are still a subset of `schema/handoff-v1.json`. If it fails, update the schema (add missing field as optional, or raise a new field the plugin needs) before declaring the sync complete.
 
 ---
 *Last updated: 2026-04-21 — upstream sync to GSD 1.38.3 (plugin 2.38.3).*
