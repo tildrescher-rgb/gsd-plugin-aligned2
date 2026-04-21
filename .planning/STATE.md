@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Milestone: v1.2 Upstream Resilience (executing — 1/3 phases done)
-Phase: 7 complete ✓ (DRIFT-01 + DRIFT-02 file-layout portion closed). Baseline 109/38/71.
-Status: First CI workflow shipped. Detector catches regressions beyond committed baseline. Ready for `/gsd:plan-phase 8`.
-Last activity: 2026-04-21 — Phase 7 executed, baseline scope-fix applied post-execution
+Phase: 8 (HANDOFF Schema Baseline + Detector) — planned 2026-04-21
+Status: Phase 8 RESEARCH + CONTEXT + PLAN written. R-1 resolved inline (upstream schema is stable across 1.37.x–1.38.x; plugin is a strict superset). 6 tasks ready. Ready for `/gsd:execute-phase 8`.
+Last activity: 2026-04-21 — Phase 8 research + plan written
 
 ```
 v1.2 Progress: [===_______] 33% (1/3 phases — Phase 7 complete; 8, 9 pending)
