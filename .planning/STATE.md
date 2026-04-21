@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-11)
 ## Current Position
 
 Milestone: v1.2 Upstream Resilience (executing — 2/3 phases done)
-Phase: 9 (Unified check-drift + docs) — pending planning
+Phase: 9 (Unified check-drift + docs) — planned 2026-04-21; ready for `/gsd:execute-phase 9`
 Status: Phase 8 executed 2026-04-21. `schema/handoff-v1.json` committed as draft-07 JSON Schema (19 fields, 17 required + 2 optional). `bin/maintenance/check-handoff-schema.cjs` runs `writeCheckpoint()` in tmp dir + ajv validate (runs in CI). `bin/maintenance/check-upstream-schema.cjs` diffs upstream pause-work fields vs schema (post-sync only). `.github/workflows/check-drift.yml` now runs file-layout + handoff-schema jobs in parallel. SCHEMA-01/02/03 + DRIFT-02 (schema portion) closed. Ready for `/gsd:plan-phase 9`.
 Last activity: 2026-04-21 — Phase 8 executed (6 tasks, 6 commits, 12 min)
 
