@@ -141,6 +141,13 @@ Enable auto-update for the marketplace in Claude Code settings and updates will 
 
 Note: Step 1 refreshes the marketplace index but does not upgrade the installed plugin. Step 2 is needed to install the new version.
 
+## Maintenance scripts
+
+Lightweight Node scripts live in `bin/maintenance/` for plugin upkeep tasks that aren't part of the user-facing CLI.
+
+- `node bin/maintenance/check-file-layout.cjs` — **File-layout drift detector.** Scans plugin content for `@~/.claude/get-shit-done/*` references, classifies each as repairable (plugin has a local counterpart) or genuinely missing, and compares counts to `tests/drift-baseline.json`. Exits non-zero if drift regresses beyond baseline. Runs in CI on every push and pull request. Pass `--dry` to preview or `--write-baseline` to regenerate the baseline after an intentional reduction.
+- `node bin/maintenance/rewrite-command-namespace.cjs` — **Namespace normalization.** Rewrites `/gsd-<skill>` → `/gsd:<skill>` across plugin content. Run after every upstream GSD sync since upstream uses the dash form.
+
 ## Migrating from legacy install
 
 If you previously installed GSD via `get-shit-done-cc` or manual setup, most migration happens automatically.
