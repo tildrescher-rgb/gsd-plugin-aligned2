@@ -61,8 +61,8 @@ const allFiles = execSync('git ls-files', { encoding: 'utf-8' }).trim().split('\
 const textExt = /\.(md|json|cjs|js|ts|tsx|txt|yml|yaml|sh|html)$/i;
 const skipDirs = [
   /^_research\//,
-  /^\.planning\/milestones\/v1\.0-/,
-  /^\.planning\/phases\/04-/,
+  /^\.planning\/milestones\/v\d+\./,        // any archived milestone (v1.0-*, v1.1-phases/, v1.2-phases/, ...)
+  /^\.planning\/phases\/04-/,               // kept for reference; Phase 04 was moved to v1.1-phases/ above
   /^\.planning\/quick\/2604(0[7-9]|1[0-8])-/, // pre-2026-04-19 quick tasks
 ];
 const included = allFiles.filter(f => {
