@@ -36,3 +36,15 @@ Context files are resolved inside the workflow (`init verify-work`) and delegate
 Execute the verify-work workflow from @~/.claude/get-shit-done/workflows/verify-work.md end-to-end.
 Preserve all workflow gates (session management, test presentation, diagnosis, fix planning, routing).
 </process>
+
+<output_format>
+When this workflow concludes (verification passed or routed to gap closure), emit a Next Up continuation block following the pattern in `references/continuation-format.md`:
+
+- Show verification status (e.g., `## ✓ Verification Passed` or `## ⚠ Gaps Found — Routing to Plan` with details)
+- Emit a `## ▶ Next Up` heading with the next likely command (`/gsd:complete-milestone` if all phases verified, `/gsd:plan-phase --gaps` if gaps found, `/gsd:next` if unsure)
+- Use **`` `/clear` then: ``** before the command
+- Include a parenthetical: *(`/clear` is safe — `/gsd:resume-work` restores position from `HANDOFF.json` if you change your mind)*
+- Add an "Also available:" section with 1-3 alternatives where relevant
+
+Verification accumulates lots of test/UAT prose that won't help downstream; phase-end is a clean boundary for `/clear`.
+</output_format>

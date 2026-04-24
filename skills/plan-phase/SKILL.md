@@ -50,3 +50,15 @@ Normalize phase input in step 2 before any directory lookups.
 Execute the plan-phase workflow from @~/.claude/get-shit-done/workflows/plan-phase.md end-to-end.
 Preserve all workflow gates (validation, research, planning, verification loop, routing).
 </process>
+
+<output_format>
+When planning concludes (PLAN.md files written, plan-checker passed, STATE.md updated), emit a Next Up continuation block following the pattern in `references/continuation-format.md`:
+
+- Show planning status (e.g., `## ✓ Phase N Planned — M plans, K tasks` with brief plan list)
+- Emit a `## ▶ Next Up` heading with `/gsd:execute-phase N`
+- Use **`` `/clear` then: ``** before the command
+- Include a parenthetical: *(`/clear` is safe — `/gsd:resume-work` restores position from `HANDOFF.json` if you change your mind)*
+- Add an "Also available:" section: review the plan files, run `/gsd:list-phase-assumptions N`, etc.
+
+Plan-to-execute is a clean boundary — the discuss/research/plan conversation rarely informs execution. Suggesting `/clear` here keeps execution starting with a tight, plan-focused context.
+</output_format>

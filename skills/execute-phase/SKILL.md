@@ -61,3 +61,15 @@ Context files are resolved inside the workflow via `gsd-sdk query init.execute-p
 Execute the execute-phase workflow from @~/.claude/get-shit-done/workflows/execute-phase.md end-to-end.
 Preserve all workflow gates (wave execution, checkpoint handling, verification, state updates, routing).
 </process>
+
+<output_format>
+When this workflow completes, emit a Next Up continuation block following the pattern in `references/continuation-format.md`:
+
+- Show completion status (e.g., `## ✓ Phase N Complete` with plan/task tally)
+- Emit a `## ▶ Next Up` heading with the next likely command
+- Use **`` `/clear` then: ``** before the command
+- Include a parenthetical: *(`/clear` is safe — `/gsd:resume-work` restores position from `HANDOFF.json` if you change your mind)*
+- Add an "Also available:" section with 1-3 alternatives where relevant
+
+Phase boundaries are the highest-value places to clear context — the accumulated execution conversation rarely informs the next phase, and `/clear` resets the prompt cache cleanly. Always suggest it on completion.
+</output_format>

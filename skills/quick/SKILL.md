@@ -158,6 +158,18 @@ Preserve all workflow gates (validation, task description, planning, execution, 
 
 </process>
 
+<output_format>
+When the quick task completes (SUMMARY.md written, STATE.md updated), emit a Next Up continuation block following the pattern in `references/continuation-format.md`:
+
+- Show completion status (e.g., `## ✓ Quick Task Complete — {slug}`)
+- Brief one-line recap of what shipped (file count + commit hash)
+- Emit a `## ▶ Next Up` heading suggesting the next likely action (often `/gsd:next` or returning to a paused phase)
+- Use **`` `/clear` then: ``** before the command **only for quick tasks that ran for >5 tool calls or >10 minutes** — short trivial tasks don't accumulate enough context to warrant a clear
+- When `/clear` IS suggested, include the parenthetical: *(`/clear` is safe — `/gsd:resume-work` restores position from `HANDOFF.json` if you change your mind)*
+
+The skip-clear-on-trivial-tasks rule keeps the prompt cache investment intact for follow-up small fixes; the suggest-clear-on-substantial-tasks rule sheds accumulated context before a phase-scope shift.
+</output_format>
+
 <notes>
 - Quick tasks live in `.planning/quick/` — separate from phases, not tracked in ROADMAP.md
 - Each quick task gets a `YYYYMMDD-{slug}/` directory with PLAN.md and eventually SUMMARY.md

@@ -112,6 +112,19 @@ Output: Milestone archived (roadmap + requirements), PROJECT.md evolved, git tag
 
 </process>
 
+<output_format>
+After the milestone is archived and tagged, emit a Milestone Complete continuation block following the pattern in `references/continuation-format.md` (§ Milestone Complete variant):
+
+- `## 🎉 Milestone v{{version}} Complete` with phase/plan/task summary
+- Brief one-paragraph "what shipped" recap
+- `## ▶ Next Up` heading
+- Use **`` `/clear` then: ``** before `/gsd:new-milestone`
+- Parenthetical: *(`/clear` is safe — `/gsd:resume-work` restores position from `HANDOFF.json` if you change your mind)*
+- Optional "Also available:" with `/gsd:audit-milestone` (retrospective audit) or `/gsd:review-backlog` (deferred items review)
+
+Milestone close is the single biggest context-shed point in the workflow. The just-shipped milestone's plan/execute conversation is finished; the next milestone wants a clean slate. Always suggest `/clear`.
+</output_format>
+
 <success_criteria>
 
 - Milestone archived to `.planning/milestones/v{{version}}-ROADMAP.md`
