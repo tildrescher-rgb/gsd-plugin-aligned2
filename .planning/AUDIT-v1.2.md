@@ -73,7 +73,7 @@ Three quick tasks landed between the v1.1 ship and the v1.2 ship that are struct
 
 - **Pre-planning census scope drift.** My Phase 7 census used `grep -rohE ... skills/ agents/ references/ templates/` which missed hits in `bin/`, `hooks/`, etc. Baseline had to be adjusted post-execution. Lesson: for ratchet-baseline tasks, run the actual detector in dry mode BEFORE writing the plan's strict-count acceptance criteria.
 - **Skip-pattern ordering bug.** The rewrite-command-namespace.cjs skip list excluded only `v1.0-` archives when it should've been `v\d+\.` (generic). Surfaced during the 1.38.3 sync as v1.1-phases/ archives being wrongly touched. Fixed in the same commit but would've been caught earlier with a broader-scoped initial skip list.
-- **Plan self-collision.** Phase 9's plan document contained the literal string `/gsd-execute-phase` as a regression-test example, which made it part of the baseline corpus itself. Unicode-hyphen workaround was clever but not ideal. Lesson: when a plan's regression-test strings would match the detector's regex, use code fences or explicit anchors to exempt them.
+- **Plan self-collision.** Phase 9's plan document contained a literal dash-form `/gsd-<real-skill-name>` string as a regression-test example, which made it part of the baseline corpus itself. Unicode-hyphen workaround was clever but not ideal. Lesson: when a plan's regression-test strings would match the detector's regex, use code fences or explicit anchors to exempt them. (This audit doc generalizes the example to `/gsd-<real-skill-name>` to avoid re-triggering the detector on itself.)
 
 ## Verdict
 
