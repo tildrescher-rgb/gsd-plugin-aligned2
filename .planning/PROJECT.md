@@ -41,6 +41,7 @@ Reduce GSD's per-turn token overhead and agent spawn latency without breaking mu
 - ✓ CHANGELOG.md scaffold tracking plugin vs upstream versions — v1.2 Phase 9
 - ✓ PROJECT.md post-sync checklist formalized to 9 steps with drift-check gate — v1.2 Phase 9
 - ✓ Skill directories renamed `skills/gsd-<name>/` → `skills/<name>/` — fixed duplicated `/gsd:gsd-<skill>` prefix in tab completion — v1.2 quick task 260424-srn
+- ✓ PostToolUse periodic checkpoint bridges Claude Code's microcompact gap — file-mutation tool calls trigger a fresh HANDOFF write (throttled to once per 60s) so resume reflects recent state even when only microcompact (not PreCompact) has run — quick task 260425-mct
 
 ### Active (v1.3 candidates; not yet scoped to a milestone)
 

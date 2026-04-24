@@ -37,8 +37,8 @@
     },
     "source": {
       "type": "string",
-      "enum": ["auto-compact", "manual-pause"],
-      "$comment": "Plugin extension (not in upstream). Optional for upstream-compat. Distinguishes PreCompact-hook-triggered checkpoints from manual /gsd:pause-work checkpoints."
+      "enum": ["auto-compact", "manual-pause", "auto-postool"],
+      "$comment": "Plugin extension (not in upstream). Optional for upstream-compat. Values: auto-compact (PreCompact hook), manual-pause (/gsd:pause-work or `checkpoint --source manual-pause`), auto-postool (PostToolUse hook periodic checkpoint added 2026-04-25 to bridge the microcompact gap; throttled by HANDOFF.json mtime to at most once per 60s)."
     },
     "partial": {
       "type": "boolean",

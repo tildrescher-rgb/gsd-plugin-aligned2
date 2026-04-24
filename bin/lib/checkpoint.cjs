@@ -188,7 +188,7 @@ function scanPhasePlans(phaseDir) {
  *
  * @param {string} cwd - project root directory
  * @param {object} options
- * @param {string} [options.source] - "auto-compact" | "manual-pause" (default: "manual-pause")
+ * @param {string} [options.source] - "auto-compact" | "manual-pause" | "auto-postool" (default: "manual-pause")
  * @param {string} [options.contextNotes] - additional context from caller
  * @param {boolean} [options.partial] - flag set when caller hit a timeout (default: false)
  * @returns {object} HANDOFF.json data (19 fields)
@@ -197,6 +197,7 @@ function generateCheckpoint(cwd, options = {}) {
   const source = options.source || 'manual-pause';
   const callerPartial = options.partial === true;
   const callerNotes = options.contextNotes || '';
+  const isAutomatic = source === 'auto-compact' || source === 'auto-postool';
 
   // Default skeleton — every field present so callers can rely on the shape
   // even when gathering fails.
@@ -211,7 +212,7 @@ function generateCheckpoint(cwd, options = {}) {
     plan: null,
     task: null,
     total_tasks: null,
-    status: source === 'auto-compact' ? 'auto-checkpoint' : 'paused',
+    status: isAutomatic ? 'auto-checkpoint' : 'paused',
     completed_tasks: [],
     remaining_tasks: [],
     blockers: [],
