@@ -8,6 +8,16 @@ History before 2.38.2 lives in git + the per-milestone archive (see `.planning/m
 
 ## [Unreleased]
 
+## [2.38.7] - 2026-04-25  (based on upstream GSD 1.38.3)
+
+Plugin-only patch — closes a real read-heavy-session checkpoint gap surfaced by a usage-cap incident, plus a fuller README comparison vs upstream.
+
+### Fixed
+- **PostToolUse periodic checkpoint now covers read-heavy research sessions.** Yesterday's matcher (`Bash|Edit|Write|MultiEdit|NotebookEdit`) only fired on file-mutating tool calls. A real research-phase session in another project hit a usage cap with the last checkpoint written 18 minutes earlier — those 18 minutes were almost entirely `Read`, `Grep`, `Glob`, `WebFetch` calls. None in the matcher → PostToolUse never fired → no checkpoint. Matcher broadened to `Bash|Edit|Write|MultiEdit|NotebookEdit|Read|Grep|Glob|WebFetch|WebSearch`. Combined with the existing 60s mtime throttle, write rate stays bounded (≤1/min regardless of how often the hook fires). Smoke-tested under burst load (5 rapid reads → 1 write). Token cost: zero — verified in CC source that PostToolUse hook output is never injected into model context (quick task `260425-rgw`, commit `7497cc6`).
+
+### Changed
+- **README "What changed from upstream GSD"** expanded from a single 6-row table to four grouped tables — Install + runtime architecture, Session continuity, Drift resilience, Plugin-environment robustness. Surfaces the v1.1, v1.2, and v2.38.x improvements that previously weren't documented as user-facing differences.
+
 ## [2.38.6] - 2026-04-25  (based on upstream GSD 1.38.3)
 
 Plugin-only patch — closes the largest deferred drift category from v1.2 Phase 7.
