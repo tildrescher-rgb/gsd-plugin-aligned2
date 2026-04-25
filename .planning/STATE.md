@@ -105,6 +105,7 @@ None.
 | 260425-mct | PostToolUse periodic checkpoint bridges Claude Code's microcompact gap (60s mtime throttle, source=auto-postool) | 2026-04-25 | 1c0ab2f | [260425-mct-postool-checkpoint](./quick/260425-mct-postool-checkpoint/) |
 | 260425-clr | Resurface `/clear` suggestions at end-of-flow boundaries (6 skills now emit Next Up continuation blocks; references/continuation-format.md was dormant) | 2026-04-25 | e0903f7 | [260425-clr-clear-suggestions](./quick/260425-clr-clear-suggestions/) |
 | 260425-wfd | Ship plugin-local `workflows/` dir (78 files) + rewrite all `@~/.claude/get-shit-done/*` refs to `@${CLAUDE_PLUGIN_ROOT}/*` form — closes Category B drift (genuinely-missing now 0; baseline 122/122/0) | 2026-04-25 | 8d3fbf9 | [260425-wfd-ship-workflows-dir](./quick/260425-wfd-ship-workflows-dir/) |
+| 260425-rgw | Broaden PostToolUse matcher to also include Read/Grep/Glob/WebFetch/WebSearch (closes 18-min research-read checkpoint gap from sftp-manager incident) | 2026-04-25 | 7497cc6 | [260425-rgw-postool-read-tools](./quick/260425-rgw-postool-read-tools/) |
 | 260421-rnu | Reorganize README — new-user flow (install/use/update) first; upstream-user migration content consolidated at end | 2026-04-21 | 5b5efd5 | [260421-rnu-readme-new-user-reorg](./quick/260421-rnu-readme-new-user-reorg/) |
 
 ## Session Continuity
