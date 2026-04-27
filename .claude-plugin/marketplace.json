@@ -1,24 +1,25 @@
 {
-  "name": "gsd-plugin",
+  "name": "gsd-plugin-aligned",
   "owner": {
-    "name": "Jasper Nuyens"
+    "name": "tildrescher-rgb",
+    "url": "https://github.com/tildrescher-rgb"
   },
   "metadata": {
-    "description": "Performance-optimized GSD plugin for Claude Code"
+    "description": "ALIGNED-Fork des GSD-Plugins -- mit deutscher Brand-Voice-Reference, Cowork-Memory-Spiegelung und Custom-Legion-Skills fuer den Bau der ALIGNED Productivity Cloud (Hive-Mind 'Legion'). Upstream: jnuyens/gsd-plugin."
   },
   "plugins": [
     {
       "name": "gsd",
       "source": "./",
-      "description": "Get Shit Done -- structured workflow plugin for Claude Code with planning, execution, verification, and MCP-backed project state",
+      "description": "Get Shit Done (ALIGNED) -- strukturierter Workflow-Plugin mit Planning, Execution, Verification + MCP-backed Project-State. Slash-Commands bleiben /gsd:* fuer Kompatibilitaet mit Upstream.",
       "version": "2.38.7",
       "author": {
-        "name": "Jasper Nuyens"
+        "name": "tildrescher-rgb"
       },
-      "homepage": "https://github.com/jnuyens/gsd-plugin",
-      "repository": "https://github.com/jnuyens/gsd-plugin",
+      "homepage": "https://github.com/tildrescher-rgb/gsd-plugin-aligned2",
+      "repository": "https://github.com/tildrescher-rgb/gsd-plugin-aligned2",
       "license": "MIT",
-      "keywords": ["workflow", "planning", "gsd", "mcp"],
+      "keywords": ["workflow", "planning", "gsd", "mcp", "aligned", "legion"],
       "category": "productivity"
     }
   ]

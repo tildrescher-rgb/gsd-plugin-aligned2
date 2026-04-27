@@ -1,18 +1,22 @@
 {
   "name": "gsd",
   "version": "2.38.7",
-  "description": "Get Shit Done -- a structured workflow plugin for Claude Code that adds planning, execution, and verification commands with MCP-backed project state",
+  "description": "Get Shit Done (ALIGNED-Fork) -- structured workflow plugin for Claude Code with planning, execution, verification, and MCP-backed project state. ALIGNED-Variante mit deutscher Brand-Voice-Reference, Cowork-Memory-Spiegelung und Custom-Legion-Skills fuer den Bau der ALIGNED Productivity Cloud (Hive-Mind 'Legion').",
   "author": {
-    "name": "Jasper Nuyens"
+    "name": "tildrescher-rgb",
+    "url": "https://github.com/tildrescher-rgb"
   },
-  "repository": "https://github.com/jnuyens/gsd-plugin",
+  "repository": "https://github.com/tildrescher-rgb/gsd-plugin-aligned2",
+  "homepage": "https://github.com/tildrescher-rgb/gsd-plugin-aligned2",
   "license": "MIT",
   "keywords": [
     "workflow",
     "planning",
     "execution",
     "project-management",
-    "gsd"
+    "gsd",
+    "aligned",
+    "legion"
   ],
   "mcpServers": {
     "gsd": {

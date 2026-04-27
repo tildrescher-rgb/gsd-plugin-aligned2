@@ -1,6 +1,18 @@
-# GSD Plugin -- Get Shit Done for Claude Code
+# GSD Plugin (ALIGNED-Fork) -- Get Shit Done for Claude Code
 
-**Based on:** [GSD 1.38.3](https://github.com/gsd-build/get-shit-done/releases/tag/v1.38.3) base tree by **TACHES** (Lex Christopherson)
+> **ALIGNED-Variante.** Dieser Fork erweitert `jnuyens/gsd-plugin` um:
+> - `references/aligned-brand-voice.md` -- deutsche Brand-Voice fuer Plan/Spec-Outputs
+> - Cowork-Memory-Spiegelung (geplant) -- Phase-Summaries werden nach `cowork-memory/legion-build/` synchronisiert
+> - Custom-Legion-Skills (`/gsd:legion-*`, geplant) -- Worker-Bootstrap, Migration, Pilot, Test, Status
+>
+> Slash-Commands bleiben `/gsd:*` -- keine Aenderung gegenueber Upstream.
+>
+> **Upstream:** [jnuyens/gsd-plugin](https://github.com/jnuyens/gsd-plugin)
+> **Konfigurations-Doku im konsumierenden Repo:** `.ruflo/aligned/04b_gsd_integration.md` in `tildrescher-rgb/aligned-productivity-cloud`.
+
+---
+
+**Based on:** [GSD 1.38.3](https://github.com/gsd-build/get-shit-done/releases/tag/v1.38.3) base tree by **TACHES** (Lex Christopherson) + plugin packaging by **Jasper Nuyens**
 
 **Plugin version:** `2.38.7`
 
